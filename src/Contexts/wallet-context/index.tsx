@@ -20,7 +20,7 @@ export const WalletProvider = ({ children }: iWalletContextProps) => {
 
   let userId;
   const getUserId = async () => {
-    if (userInfo === false) {
+    if (userInfo === null) {
     } else {
       let id = userInfo.user.id;
       console.log(id);
