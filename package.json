@@ -9,12 +9,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
-<<<<<<< HEAD
-=======
     "@hookform/resolvers": "^2.9.10",
     "@types/styled-components": "^5.1.26",
     "animate.css": "^4.1.1",
->>>>>>> 7d1a7df32c75adb7d500b2b6473e242d4eac5bd9
     "axios": "^1.2.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
