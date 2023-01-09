@@ -1,5 +1,6 @@
-import React, { createContext, useEffect, useState } from "react";
+import React, { createContext, useEffect, useState, useContext } from "react";
 import { fakeApi } from "../../Services/fake-api";
+import { UserContext } from "../user-context";
 
 interface iWalletContextProps {
   children: React.ReactNode;
@@ -14,7 +15,21 @@ interface iAddOrChangeAsset {
 export const WalletContext = createContext({});
 
 export const WalletProvider = ({ children }: iWalletContextProps) => {
+  const { userInfo } = useContext(UserContext);
   const [userAssets, setUserAssets] = useState({});
+
+  let userId;
+  const getUserId = async () => {
+    if (userInfo === null) {
+    } else {
+      let id = userInfo.user.id;
+      console.log(id);
+      userId = id;
+      console.log(userId);
+    }
+  };
+  getUserId();
+  // console.log(teste);
 
   async function fetchUserAssets() {
     try {
@@ -30,9 +45,9 @@ export const WalletProvider = ({ children }: iWalletContextProps) => {
     }
   }
 
-  useEffect(() => {
-    fetchUserAssets();
-  }, []);
+  // useEffect(() => {
+  //   fetchUserAssets();
+  // }, []);
 
   async function addOrChangeAsset(data: iAddOrChangeAsset) {}
 
