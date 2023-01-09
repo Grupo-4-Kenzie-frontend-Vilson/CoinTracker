@@ -7,9 +7,20 @@ interface iUserContextProps {
 }
 
 interface iUserContextValue {
-  userInfo: {};
+  userInfo: iUserInfo;
   fetchLogin: (data: iFetchLogin) => Promise<void>;
   fetchRegister: (data: iFetchRegister) => Promise<void>;
+}
+
+interface iUser {
+  email: string;
+  name: string;
+  phone: string;
+  id: number;
+}
+interface iUserInfo {
+  accessToken: string;
+  user: iUser;
 }
 
 interface iFetchLogin {
@@ -27,7 +38,7 @@ interface iFetchRegister {
 export const UserContext = createContext({} as iUserContextValue);
 
 export const UserProvider = ({ children }: iUserContextProps) => {
-  const [userInfo, setUserInfo] = useState({});
+  const [userInfo, setUserInfo] = useState<iUserInfo | null>(null);
 
   async function fetchLogin(data: iFetchLogin) {
     try {
