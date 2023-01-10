@@ -1,12 +1,12 @@
 import { RegisterForm } from "./Components/RegisterForm"; 
-import { StyledMain } from "./style";
+import { StyledMain, StyledSection } from "./style";
 
 export const RegisterPage = () => {
   return (
     <StyledMain>
-      <section>
+      <StyledSection>
         <RegisterForm />
-      </section>
+      </StyledSection>
       
       /* Will be the component with the Company's about. */
     </StyledMain>
