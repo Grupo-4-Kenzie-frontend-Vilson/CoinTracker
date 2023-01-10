@@ -3,7 +3,7 @@ import { StyledForm } from "./Style";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { LoginSchema } from "./LoginSchema";
 import { useContext } from "react";
-import { UserContext } from "../../../../Contexts/user-context";
+import { UserContext } from "../../../Contexts/user-context";
 
 interface ILoginData {
   email: string;

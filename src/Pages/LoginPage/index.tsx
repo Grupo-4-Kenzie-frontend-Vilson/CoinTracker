@@ -1,11 +1,10 @@
-import { LoginForm } from "./components/LoginForm"; 
+import { LoginForm } from "./LoginForm";
 import { StyledMain } from "./style";
 
 export const LoginPage = () => {
   return (
     <StyledMain>
       /* Will be the component with the Company's about. */
-      
       <section>
         <LoginForm />
       </section>
