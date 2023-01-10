@@ -1,12 +1,15 @@
-import { LoginForm } from "./LoginForm";
-import { StyledMain } from "./style";
+import { UserProvider } from "../../Contexts/user-context";
+import { LoginForm } from "./LoginForm"; 
+import { StyledMain, StyledSection } from "./style";
 
 export const LoginPage = () => {
   return (
-    <StyledMain>
-      <section>
-        <LoginForm />
-      </section>
-    </StyledMain>
+    <UserProvider>
+      <StyledMain>
+        <StyledSection>
+          <LoginForm />
+        </StyledSection>
+      </StyledMain>
+    </UserProvider>
   );
 };

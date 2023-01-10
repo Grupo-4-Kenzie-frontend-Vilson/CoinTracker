@@ -1,13 +1,15 @@
-import { RegisterForm } from "./RegisterForm";
-import { StyledMain } from "./style";
+import { UserProvider } from "../../Contexts/user-context";
+import { RegisterForm } from "./RegisterForm"; 
+import { StyledMain, StyledSection } from "./style";
 
 export const RegisterPage = () => {
   return (
-    <StyledMain>
-      <section>
-        <RegisterForm />
-      </section>
-      /* Will be the component with the Company's about. */
-    </StyledMain>
+    <UserProvider>
+      <StyledMain>
+        <StyledSection>
+          <RegisterForm />
+        </StyledSection>
+      </StyledMain>
+    </UserProvider>
   );
 };
