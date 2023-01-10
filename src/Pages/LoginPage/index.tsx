@@ -1,13 +1,15 @@
-import { LoginForm } from "./LoginForm";
-import { StyledMain } from "./style";
+
+import { LoginForm } from "./components/LoginForm"; 
+import { StyledMain, StyledSection } from "./style";
+
 
 export const LoginPage = () => {
   return (
     <StyledMain>
       /* Will be the component with the Company's about. */
-      <section>
+      <StyledSection>
         <LoginForm />
-      </section>
+      </StyledSection>
     </StyledMain>
   );
 };
