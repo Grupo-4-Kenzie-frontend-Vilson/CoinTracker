@@ -1,6 +1,4 @@
-import { Routes, Route, Navigate } from "react-router-dom";
 import { MainHeader } from "../Components/MainHeader";
-
 import { LoginPage } from "../Pages/LoginPage";
 import { RegisterPage } from "../Pages/RegisterPage";
 

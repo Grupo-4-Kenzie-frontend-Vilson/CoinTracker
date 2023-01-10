@@ -7,7 +7,6 @@ export const RegisterPage = () => {
       <StyledSection>
         <RegisterForm />
       </StyledSection>
-      
       /* Will be the component with the Company's about. */
     </StyledMain>
   );
