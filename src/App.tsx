@@ -1,5 +1,5 @@
-import { LoginMain } from "./Pages/LoginPage/LoginMain";
 import { MainRoutes } from "./Routes";
+import { GlobalStyles } from "./Styles";
 
 function App() {
   return (
@@ -8,6 +8,7 @@ function App() {
     // </div>
     <>
       <MainRoutes />
+      <GlobalStyles />
     </>
   );
 }

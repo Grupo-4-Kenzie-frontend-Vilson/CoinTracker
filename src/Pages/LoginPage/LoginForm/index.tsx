@@ -2,10 +2,14 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { StyledForm } from "./Style";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { LoginSchema } from "./LoginSchema";
-import { useContext } from "react";
+import { ReactNode, useContext } from "react";
 import { UserContext } from "../../../Contexts/user-context";
+import { Input } from "../../../Components/Inputs";
+import { FormInput } from "../../../Components/FormInput";
+import { element } from "prop-types";
+import { ButtonLogin } from "../../../Styles/Buttons";
 
-interface ILoginData {
+export interface ILoginData {
   email: string;
   password: string;
 }
@@ -27,13 +31,25 @@ export const LoginForm = () => {
 
   return (
     <StyledForm onSubmit={handleSubmit(submit)} noValidate>
-      <input type="email" placeholder="Email" {...register("email")} />
-      {errors.email?.message && <p>{errors.email.message}</p>}
-
-      <input type="password" placeholder="Senha" {...register("password")} />
-      {errors.password?.message && <p>{errors.password.message}</p>}
-
-      <button type="submit">Entrar</button>
+      <Input
+        id="email"
+        label="E-mail"
+        type="email"
+        placeholder="Digite o seu e-mail"
+        register={register("email")}
+        error={errors.email}
+      />
+      <Input
+        id="password"
+        label="Senha"
+        type="password"
+        placeholder="Digite a sua senha"
+        register={register("password")}
+        error={errors.password}
+      />
+{/* 
+      <FormInput name="email" control={control} type="email" label="e-mail" errorMenssage={errors.email}/>  */}
+      <ButtonLogin type="submit">Entrar</ButtonLogin>
     </StyledForm>
   );
 };
