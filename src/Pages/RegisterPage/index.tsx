@@ -1,4 +1,4 @@
-import { RegisterForm } from "./Components/RegisterForm"; 
+import { RegisterForm } from "./RegisterForm";
 import { StyledMain } from "./style";
 
 export const RegisterPage = () => {
@@ -7,7 +7,6 @@ export const RegisterPage = () => {
       <section>
         <RegisterForm />
       </section>
-      
       /* Will be the component with the Company's about. */
     </StyledMain>
   );
