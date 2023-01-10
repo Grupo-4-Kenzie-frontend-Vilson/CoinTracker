@@ -1,19 +1,17 @@
 import styled from "styled-components"
 
-export const StyledMainHeader = styled.header`
+export const StyledMainDiv = styled.div`
 display: flex;
 flex-direction: row;
 justify-content: space-between;
-background: #D9D9D9;
-box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-border-radius: 0px 0px 10px 10px;
+background: #061121;
 
 @media only screen and (max-width: 768px){
-    padding: 10px 16px;
+    padding: 2px 16px;
 }
 
 @media only screen and (min-width: 769px){
-    padding: 20px 52px;
+    padding: 8px 32px;
 }
 `
 
@@ -23,4 +21,13 @@ flex-direction: row;
 justify-content: center;
 align-items: center;
 gap: 8px;
+`
+
+export const StyledH3 = styled.h3`
+font-family: 'Poppins';
+font-style: normal;
+font-weight: 600;
+font-size: 36px;
+line-height: 54px;
+color: #FFFFFF;
 `
