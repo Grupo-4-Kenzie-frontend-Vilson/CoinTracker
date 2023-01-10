@@ -9,7 +9,7 @@ interface iExchangeContext {
 
 export const ExchangeContext = createContext({});
 
-export const WalletProvider = ({ children }: iExchangeContext) => {
+export const ExchangeProvider = ({ children }: iExchangeContext) => {
 
 
   async function fetchAllCoins() {
@@ -34,6 +34,7 @@ export const WalletProvider = ({ children }: iExchangeContext) => {
     }
   }
 
+  console.log('testing, attention please!')
 
   
   return <ExchangeContext.Provider value={{}}>{children}</ExchangeContext.Provider>;
