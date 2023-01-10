@@ -1,13 +1,13 @@
 import { UserProvider } from "../../Contexts/user-context";
-import { LoginForm } from "./LoginForm"; 
+import { RegisterForm } from "./RegisterForm"; 
 import { StyledMain, StyledSection } from "./style";
 
-export const LoginPage = () => {
+export const RegisterPage = () => {
   return (
     <UserProvider>
       <StyledMain>
         <StyledSection>
-          <LoginForm />
+          <RegisterForm />
         </StyledSection>
       </StyledMain>
     </UserProvider>
