@@ -1,7 +1,6 @@
 import React, { createContext, useEffect, useState, useContext } from "react";
 import { awesomeApi } from "../../Services/awesome-api";
 import { coinRankingApi } from "../../Services/coinranking-api";
-import { UserContext } from "../user-context";
 
 interface iExchangeContext {
   children: React.ReactNode;
@@ -25,7 +24,7 @@ export const ExchangeProvider = ({ children }: iExchangeContext) => {
     }
   }
 
-  async function fetchDollarPrincing() {
+  async function fetchDollarPricing() {
     try {
       const fetch = await awesomeApi.get(``);
       console.log(fetch.data.USDBRL);
@@ -34,8 +33,8 @@ export const ExchangeProvider = ({ children }: iExchangeContext) => {
     }
   }
 
-  console.log('testing, attention please!')
-
+  fetchAllCoins()
+  fetchDollarPricing()
   
   return <ExchangeContext.Provider value={{}}>{children}</ExchangeContext.Provider>;
 };
