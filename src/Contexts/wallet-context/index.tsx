@@ -1,4 +1,5 @@
-import React, { createContext, useState, useContext, useEffect } from "react";
+import React, { createContext, useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { fakeApi } from "../../Services/fake-api";
 
 interface iWalletContextProps {
@@ -11,6 +12,7 @@ interface iWalletContextValue {
   editAsset: (data: iEditAsset, assetId: number) => Promise<void>;
   deleteAsset: (assetId: number) => Promise<void>;
   userAssets: [] | iUserAsset[];
+  logout: () => void;
 }
 
 interface iAddAssets {
@@ -33,6 +35,7 @@ interface iUserAsset {
 export const WalletContext = createContext({} as iWalletContextValue);
 
 export const WalletProvider = ({ children }: iWalletContextProps) => {
+  const navigate = useNavigate();
   const [userAssets, setUserAssets] = useState<[] | iUserAsset[]>([]);
 
   const userToken = window.localStorage.getItem("@userToken");
@@ -91,10 +94,15 @@ export const WalletProvider = ({ children }: iWalletContextProps) => {
       const fetch = await fakeApi.delete(`/assets/${assetId}`, {
         headers: { Authorization: `Bearer ${userToken}` },
       });
-      console.log(fetch);
     } catch (err) {
       console.log(err);
     }
+  }
+
+  function logout() {
+    window.localStorage.removeItem("@userToken");
+    window.localStorage.removeItem("@userId");
+    navigate("/login");
   }
 
   useEffect(() => {
@@ -103,7 +111,14 @@ export const WalletProvider = ({ children }: iWalletContextProps) => {
 
   return (
     <WalletContext.Provider
-      value={{ fetchUserAssets, addAsset, editAsset, deleteAsset, userAssets }}
+      value={{
+        fetchUserAssets,
+        addAsset,
+        editAsset,
+        deleteAsset,
+        userAssets,
+        logout,
+      }}
     >
       {children}
     </WalletContext.Provider>
