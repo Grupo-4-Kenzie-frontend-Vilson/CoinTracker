@@ -1,15 +1,35 @@
-import React, { createContext, useEffect, useState, useContext } from "react";
+import React, { createContext, useEffect, useState, useContext, SetStateAction } from "react";
 import { awesomeApi } from "../../Services/awesome-api";
 import { coinRankingApi } from "../../Services/coinranking-api";
 
-interface iExchangeContext {
+interface iExchangeContextProps {
   children: React.ReactNode;
 }
 
-export const ExchangeContext = createContext({});
+interface iExchangeContext {
+  allCoins: [] | iCoin[]; 
+  favoriteCoins: iCoin[]; 
+  setFavoriteCoins: React.Dispatch<SetStateAction<[] | iCoin[]>>; 
+  dollarPrice: number | null;
+}
 
-export const ExchangeProvider = ({ children }: iExchangeContext) => {
+interface iCoin {
+  name: string;
+  price: string;
+  iconUrl: string;
+  rank: string;
+  symbol: string;
+}
 
+
+export const ExchangeContext = createContext({} as iExchangeContext);
+
+export const ExchangeProvider = ({ children }: iExchangeContextProps) => {
+
+  const [allCoins, setAllCoins]   = useState<[] | iCoin[]>([])
+  const [favoriteCoins, setFavoriteCoins]   = useState<[] | iCoin[]>([])
+  const [dollarPrice, setDollarPrice]   = useState<number | null>(null)
+  
 
   async function fetchAllCoins() {
     try {
@@ -19,6 +39,7 @@ export const ExchangeProvider = ({ children }: iExchangeContext) => {
         },
       });
       console.log(fetch.data.data.coins);
+      setAllCoins(fetch.data.data.coins);
     } catch (err) {
       console.log(err);
     }
@@ -27,7 +48,8 @@ export const ExchangeProvider = ({ children }: iExchangeContext) => {
   async function fetchDollarPricing() {
     try {
       const fetch = await awesomeApi.get(``);
-      console.log(fetch.data.USDBRL);
+      console.log(fetch.data.USDBRL.ask);
+      setDollarPrice(fetch.data.USDBRL.ask);
     } catch (err) {
       console.log(err);
     }
@@ -36,5 +58,5 @@ export const ExchangeProvider = ({ children }: iExchangeContext) => {
   fetchAllCoins()
   fetchDollarPricing()
   
-  return <ExchangeContext.Provider value={{}}>{children}</ExchangeContext.Provider>;
+  return <ExchangeContext.Provider value={{allCoins, favoriteCoins, setFavoriteCoins, dollarPrice}}>{children}</ExchangeContext.Provider>;
 };

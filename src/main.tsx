@@ -7,12 +7,8 @@ import { WalletProvider } from "./Contexts/wallet-context";
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
-    <BrowserRouter>
-      <UserProvider>
-        <WalletProvider>
+    <BrowserRouter>  
           <App />
-        </WalletProvider>
-      </UserProvider>
     </BrowserRouter>
   </React.StrictMode>
 );
