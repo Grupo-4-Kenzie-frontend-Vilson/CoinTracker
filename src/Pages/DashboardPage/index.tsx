@@ -13,7 +13,7 @@ export const DashboardPage = () => {
     useContext(WalletContext);
     
   const navigate = useNavigate();
-  const userId = window.localStorage.getItem("@userId");
+  // const userId = window.localStorage.getItem("@userId");
 
   function userRedirect() {
     if (window.localStorage.getItem("@userToken")) {
