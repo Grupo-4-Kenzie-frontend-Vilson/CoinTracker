@@ -8,7 +8,7 @@ import { WalletContext } from "../../Contexts/wallet-context";
 
 export const DashboardPage = () => {
 
-  const {generatePieChartData, fetchUserAssets, userAssets} = useContext(WalletContext)
+  const {generatePieChartData, fetchUserAssets, userAssets, userId} = useContext(WalletContext)
   const navigate = useNavigate();
   function userRedirect() {
     if (window.localStorage.getItem("@userToken")) {
@@ -18,7 +18,7 @@ export const DashboardPage = () => {
   }
   
   useEffect(() => {
-    fetchUserAssets(1);
+    fetchUserAssets(userId);
     userRedirect();
     
   }, []);

@@ -1,7 +1,8 @@
 import { useContext } from "react";
-import { Button } from "../../../Components/Button";
 import { WalletContext } from "../../../Contexts/wallet-context";
 import { StyledCard } from "./style"
+import EditIcon from "../../../assets/EditCard.svg"
+import TrashIcon from "../../../assets/TrashCard.svg"
 
 interface ICoinProps {
     cripto:{
@@ -12,13 +13,11 @@ interface ICoinProps {
     }
 }
 
-
 export const WalletCard = ({ cripto }:ICoinProps) => {
 
     const { amount, coin, id, userId } = cripto
     const { editAsset, deleteAsset, fetchUserAssets } = useContext(WalletContext)
     
-
     const EditCard = () => {
         // editAsset(amount, id)
     }
@@ -28,16 +27,17 @@ export const WalletCard = ({ cripto }:ICoinProps) => {
         fetchUserAssets(userId)
     }
 
-    // console.log(cripto)
     return (
         <StyledCard>
-            <div>
+            <div className="CardPrices">
                 <h2>{coin}</h2>
                 <p>R${amount}</p>
             </div>
-            <div>
-                <img src="" alt="" />
-                <img src="" alt="" />
+            <div className="CardButtons">
+                <img src={EditIcon} alt="Edit Icon" />
+                <img src={TrashIcon}
+                    alt="Trash Icon"
+                    onClick={DeleteCard} />
             </div>
         </StyledCard>
     )

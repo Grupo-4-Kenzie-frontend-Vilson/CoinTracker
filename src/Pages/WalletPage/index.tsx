@@ -7,16 +7,30 @@ import heartImg from "../../assets/heart.svg"
 import walletImg from "../../assets/mywallet.svg"
 
 export const WalletPage = () => {
-    const { userAssets, addAsset, fetchUserAssets } = useContext(WalletContext)
-    // useEffect(() => {
-    //     fetchUserAssets(1)    
-    // }, [])
+    const { userAssets, addAsset, fetchUserAssets, userId } = useContext(WalletContext)
+    useEffect(() => {
+        fetchUserAssets(1)    
+    }, [])
+
+    const AddCripto = () => {
+        const data = {
+            amount: 1.3,
+            coin: "ETH",
+            coinId: "razxDUgYGNAdQ",
+            userId: userId,
+            id: userAssets.length
+        }
+
+        addAsset(data)
+    }
 
     return (
         <StyledMain>
             <div>
                 <h2>Adicionar a Carteira</h2>
-                <img src={walletImg} alt="My Wallet Image" />
+                <img src={walletImg} alt="My Wallet Image"
+                    onClick={AddCripto}
+                />
             </div>
 
             <section>
