@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const ButtonLogin = styled.button`
+export const ButtonForm = styled.button`
   width: 217px;
   height: 68px;
 

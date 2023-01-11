@@ -2,12 +2,11 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { StyledForm } from "./Style";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { LoginSchema } from "./LoginSchema";
-import { ReactNode, useContext } from "react";
+import { useContext } from "react";
 import { UserContext } from "../../../Contexts/user-context";
 import { Input } from "../../../Components/Inputs";
-import { FormInput } from "../../../Components/FormInput";
-import { element } from "prop-types";
-import { ButtonLogin } from "../../../Styles/Buttons";
+import { ButtonForm } from "../../../Styles/Buttons";
+import { Link } from "react-router-dom";
 
 export interface ILoginData {
   email: string;
@@ -31,6 +30,7 @@ export const LoginForm = () => {
 
   return (
     <StyledForm onSubmit={handleSubmit(submit)} noValidate>
+      <h2>Login</h2>
       <Input
         id="email"
         label="E-mail"
@@ -47,9 +47,11 @@ export const LoginForm = () => {
         register={register("password")}
         error={errors.password}
       />
-{/* 
-      <FormInput name="email" control={control} type="email" label="e-mail" errorMenssage={errors.email}/>  */}
-      <ButtonLogin type="submit">Entrar</ButtonLogin>
+      <ButtonForm type="submit">Entrar</ButtonForm>
+      <div className="footerForm">
+        <p>Ainda não possui um cadastro?</p>
+        <Link to={"/register"}>Clique aqui!</Link>
+      </div>
     </StyledForm>
   );
 };
