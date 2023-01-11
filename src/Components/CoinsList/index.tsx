@@ -1,27 +1,39 @@
-import { useContext } from 'react'
-import { StyledList } from "./style"
-import { Context } from 'vm'
-import { ExchangeContext } from '../../Contexts/exchange-context'
+import { useContext } from "react";
+import { StyledList } from "./style";
+import { ExchangeContext } from "../../Contexts/exchange-context";
+import { CardCripto } from "../CardCripto";
 
-export default function CoinsList(){
-    const { allCoins, favoriteCoins, showOnlyFavCoins } = useContext(ExchangeContext) as Context
+export default function CoinsList() {
+  const { allCoins, favoriteCoins, showOnlyFavCoins } =
+    useContext(ExchangeContext);
 
-    return (
-        <StyledList>
-            {
-                showOnlyFavCoins === true &&
-                favoriteCoins.map((coin: any) => <li>
-                    <h2>{coin.name}</h2>
-                </li>
-	            )
-            }
-            {
-                showOnlyFavCoins === false &&
-                allCoins.map((coin: any) => <li>
-                    <h2>{coin.name}</h2>
-                </li>
-	            )
-            }
-        </StyledList>
-    )
+  console.log(favoriteCoins);
+
+  return (
+    <StyledList>
+      {showOnlyFavCoins
+        ? favoriteCoins.map((coin: any) => (
+            <CardCripto
+              name={coin.name}
+              price={coin.price}
+              iconUrl={coin.iconUrl}
+              rank={coin.rank}
+              symbol={coin.symbol}
+              uuid={coin.uuid}
+              key={coin.uuid}
+            />
+          ))
+        : allCoins.map((coin: any) => (
+            <CardCripto
+              name={coin.name}
+              price={coin.price}
+              iconUrl={coin.iconUrl}
+              rank={coin.rank}
+              symbol={coin.symbol}
+              uuid={coin.uuid}
+              key={coin.uuid}
+            />
+          ))}
+    </StyledList>
+  );
 }

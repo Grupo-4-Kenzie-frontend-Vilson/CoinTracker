@@ -7,8 +7,13 @@ import { StyledMain } from "./style";
 import { WalletContext } from "../../Contexts/wallet-context";
 
 export const DashboardPage = () => {
+<<<<<<< Updated upstream
 
   const {generatePieChartData, fetchUserAssets, userAssets, userId} = useContext(WalletContext)
+=======
+  const { generatePieChartData, fetchUserAssets, userAssets } =
+    useContext(WalletContext);
+>>>>>>> Stashed changes
   const navigate = useNavigate();
   function userRedirect() {
     if (window.localStorage.getItem("@userToken")) {
@@ -16,17 +21,20 @@ export const DashboardPage = () => {
       navigate("/login");
     }
   }
-  
+
   useEffect(() => {
+<<<<<<< Updated upstream
     fetchUserAssets(userId);
+=======
+    // fetchUserAssets(1);
+>>>>>>> Stashed changes
     userRedirect();
-    
   }, []);
-  
-    useEffect(() => {
-      //Foi passado o valor 1  abaixo para desenvolver a função de generateChartData
-      generatePieChartData();
-    }, [userAssets]);
+
+  useEffect(() => {
+    //Foi passado o valor 1  abaixo para desenvolver a função de generateChartData
+    generatePieChartData();
+  }, [userAssets]);
 
   return (
     <StyledMain>
