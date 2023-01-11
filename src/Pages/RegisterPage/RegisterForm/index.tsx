@@ -4,12 +4,17 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { RegisterSchema } from "./RegisterSchema";
 import { UserContext } from "../../../Contexts/user-context";
 import { useContext } from "react";
+import { Input } from "../../../Components/Inputs";
+import { StyledButton } from "../../../Components/Button/style";
+import { Link } from "react-router-dom";
+import { ButtonForm } from "../../../Styles/Buttons";
 
 interface IRegisterData {
   email: string;
   password: string;
   name: string;
   phone: string;
+  confirmPassword: string;
 }
 
 export const RegisterForm = () => {
@@ -30,19 +35,56 @@ export const RegisterForm = () => {
 
   return (
     <StyledForm onSubmit={handleSubmit(submit)} noValidate>
-      <input type="email" placeholder="Email" {...register("email")} />
-      {errors.email?.message && <p>{errors.email.message}</p>}
+      <h2>Cadastrar-se</h2>
+      <Input
+        id="name"
+        label="Nome"
+        type="string"
+        placeholder="Digite o seu nome"
+        register={register("name")}
+        error={errors.name}
+      />
+      <Input
+        id="email"
+        label="E-mail"
+        type="email"
+        placeholder="Digite o seu e-mail"
+        register={register("email")}
+        error={errors.email}
+      />
 
-      <input type="password" placeholder="Senha" {...register("password")} />
-      {errors.password?.message && <p>{errors.password.message}</p>}
+      <Input
+        id="password"
+        label="Senha"
+        type="password"
+        placeholder="Digite a sua senha"
+        register={register("password")}
+        error={errors.password}
+      />
 
-      <input type="text" placeholder="Nome" {...register("name")} />
-      {errors.name?.message && <p>{errors.name.message}</p>}
+      <Input
+        id="senhaConfirmed"
+        label="Confirmar senha"
+        type="password"
+        placeholder="Confirmar senha"
+        register={register("confirmPassword")}
+        error={errors.confirmPassword}
+      />
 
-      <input type="phone" placeholder="Número" {...register("phone")} />
-      {errors.phone?.message && <p>{errors.phone.message}</p>}
+      <Input
+        id="phone"
+        label="Telefone"
+        type="string"
+        placeholder="Digite um numero para contato"
+        register={register("phone")}
+        error={errors.phone}
+      />
 
-      <button type="submit">Cadastrar</button>
+      <ButtonForm type="submit">Cadastrar</ButtonForm>
+      <div className="footerForm">
+        <p>Já possui cadastro?</p>
+        <Link to={"/login"}>Clique aqui!</Link>
+      </div>
     </StyledForm>
   );
 };
