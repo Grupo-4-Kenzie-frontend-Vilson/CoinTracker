@@ -1,11 +1,12 @@
 import { useContext, useState } from "react";
-import { FaWallet } from "react-icons/fa";
 import Modal from "react-modal";
 import { ExchangeContext } from "../../Contexts/exchange-context";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { WalletContext } from "../../Contexts/wallet-context";
+import { StyledAddAsset } from "./style";
+import wallet from "../../assets/mywallet.png"
 
 interface iFormSubmit {
   coin: string;
@@ -65,16 +66,22 @@ export const AddAsset = () => {
   };
 
   return (
-    <div>
-      <button onClick={openModal}>
-        <FaWallet />
-      </button>
-      <Modal isOpen={open} onRequestClose={closeModal}>
-        <header>
-          <h2>Adicionar a cripto</h2>
+    <StyledAddAsset>
+      
+        <img onClick={openModal} src={wallet} alt="carteira" />
+      
+      <Modal
+        isOpen={open}
+        onRequestClose={closeModal}
+        contentLabel="Example Modal"
+        overlayClassName="modal-overlay"
+        className="modal-content"
+      >
+        <header className="modalHeader">
+          <h2>Adicionar a Cripto</h2>
           <button onClick={closeModal}>X</button>
         </header>
-        <form onSubmit={handleSubmit(formSubmit)}>
+        <form className="formModal" onSubmit={handleSubmit(formSubmit)}>
           <select {...register("coinId")}>
             <option value={""} disabled defaultValue={""}>
               Selecionar cripto
@@ -90,9 +97,11 @@ export const AddAsset = () => {
             ))}
           </select>
           <input type="number" {...register("amount")} />
-          <button type="submit">Adicionar</button>
+          <div className="buttonModal">
+            <button type="submit">Adicionar</button>
+          </div>
         </form>
       </Modal>
-    </div>
+    </StyledAddAsset>
   );
 };
