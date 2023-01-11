@@ -7,7 +7,6 @@ interface iUserContextProps {
 }
 
 interface iUserContextValue {
-  userInfo: iUserInfo;
   fetchLogin: (data: iFetchLogin) => Promise<void>;
   fetchRegister: (data: iFetchRegister) => Promise<void>;
 }
@@ -38,16 +37,14 @@ interface iFetchRegister {
 export const UserContext = createContext({} as iUserContextValue);
 
 export const UserProvider = ({ children }: iUserContextProps) => {
-  const [userInfo, setUserInfo] = useState<iUserInfo | null>(null);
-
   async function fetchLogin(data: iFetchLogin) {
     try {
       const fetch = await fakeApi.post("/login", {
         ...data,
       });
       console.log(fetch);
-      setUserInfo(fetch.data);
       window.localStorage.setItem("@userToken", fetch.data.accessToken);
+      window.localStorage.setItem("@userId", fetch.data.user.id);
     } catch (err) {
       console.log(err);
     }
@@ -64,8 +61,15 @@ export const UserProvider = ({ children }: iUserContextProps) => {
     }
   }
 
+  // useEffect(() => {
+  //   fetchLogin({
+  //     email: "teste@gmail.com",
+  //     password: "123456",
+  //   });
+  // }, []);
+
   return (
-    <UserContext.Provider value={{ userInfo, fetchLogin, fetchRegister }}>
+    <UserContext.Provider value={{ fetchLogin, fetchRegister }}>
       {children}
     </UserContext.Provider>
   );
