@@ -40,7 +40,6 @@ export const ExchangeProvider = ({ children }: iExchangeContextProps) => {
           'x-access-token': 'coinranking4b49976245587b192ea41f41cb9c2d69147a79a9bb66f6d4'       
         },
       });
-      console.log(fetch.data.data.coins);
       setAllCoins(fetch.data.data.coins);
     } catch (err) {
       console.log(err);
@@ -50,7 +49,6 @@ export const ExchangeProvider = ({ children }: iExchangeContextProps) => {
   async function fetchDollarPricing() {
     try {
       const fetch = await awesomeApi.get(``);
-      console.log(fetch.data.USDBRL.ask);
       setDollarPrice(fetch.data.USDBRL.ask);
     } catch (err) {
       console.log(err);

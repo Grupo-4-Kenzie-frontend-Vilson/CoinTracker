@@ -44,7 +44,6 @@ export const UserProvider = ({ children }: iUserContextProps) => {
       const fetch = await fakeApi.post("/login", {
         ...data,
       });
-      console.log(fetch);
       window.localStorage.setItem("@userToken", fetch.data.accessToken);
       window.localStorage.setItem("@userId", fetch.data.user.id);
     } catch (err) {

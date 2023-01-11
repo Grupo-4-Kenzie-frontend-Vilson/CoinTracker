@@ -21,11 +21,12 @@ export const MainHeader = () => {
                 <DivCenterContent>
                     <StyledIcon src={walletIcon} alt="walletIcon"
                         onClick={() => {
-                            <Link to="/wallet" />
+                            location.href="/wallet"
                         }} />
                     <StyledIcon src={logoutIcon} alt="logoutIcon"
                         onClick={() => {
                             localStorage.clear()
+                            location.href="/login"
                         }} />
                 </DivCenterContent>
             </StyledMainHeader>
