@@ -21,4 +21,7 @@ export const GlobalStyles = createGlobalStyle`
     --color-negative: #e60000;
     --color-information: #155bcb;
   }
+  body {
+    background-color: #061121;
+  }
 `
