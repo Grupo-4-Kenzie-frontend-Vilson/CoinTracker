@@ -1,4 +1,4 @@
-import React, { createContext, useState, SetStateAction } from "react";
+import React, { createContext, useState, SetStateAction, useEffect } from "react";
 import { awesomeApi } from "../../Services/awesome-api";
 import { coinRankingApi } from "../../Services/coinranking-api";
 
@@ -51,7 +51,10 @@ export const ExchangeProvider = ({ children }: iExchangeContextProps) => {
     }
   }
 
-  fetchAllCoins();
+  useEffect(() => {
+    fetchAllCoins();
+  },[])
+
   fetchDollarPricing();
 
   return (
