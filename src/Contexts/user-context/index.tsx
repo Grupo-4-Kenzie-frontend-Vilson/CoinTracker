@@ -63,13 +63,7 @@ export const UserProvider = ({ children }: iUserContextProps) => {
     }
   }
 
-  async function autoLogin() {
-    if (window.localStorage.getItem("@userToken")) {
-      navigate("/dashboard");
-    } else {
-      navigate("/login");
-    }
-  }
+  async function autoLogin() {}
 
   useEffect(() => {
     autoLogin();
