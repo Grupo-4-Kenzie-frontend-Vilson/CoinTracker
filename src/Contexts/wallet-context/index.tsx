@@ -1,6 +1,5 @@
 import React, { createContext, useState, useContext, useEffect } from "react";
 import { fakeApi } from "../../Services/fake-api";
-import { UserContext } from "../user-context";
 
 interface iWalletContextProps {
   children: React.ReactNode;

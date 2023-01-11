@@ -1,5 +1,5 @@
-import { createContext, useState, useEffect } from "react";
-import { api } from "../../Services";
+import { createContext, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { fakeApi } from "../../Services/fake-api";
 
 interface iUserContextProps {
@@ -37,6 +37,8 @@ interface iFetchRegister {
 export const UserContext = createContext({} as iUserContextValue);
 
 export const UserProvider = ({ children }: iUserContextProps) => {
+  const navigate = useNavigate();
+
   async function fetchLogin(data: iFetchLogin) {
     try {
       const fetch = await fakeApi.post("/login", {
@@ -61,12 +63,17 @@ export const UserProvider = ({ children }: iUserContextProps) => {
     }
   }
 
-  // useEffect(() => {
-  //   fetchLogin({
-  //     email: "teste@gmail.com",
-  //     password: "123456",
-  //   });
-  // }, []);
+  async function autoLogin() {
+    if (window.localStorage.getItem("@userToken")) {
+      navigate("/dashboard");
+    } else {
+      navigate("/login");
+    }
+  }
+
+  useEffect(() => {
+    autoLogin();
+  }, []);
 
   return (
     <UserContext.Provider value={{ fetchLogin, fetchRegister }}>
