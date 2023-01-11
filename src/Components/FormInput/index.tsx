@@ -1,5 +1,4 @@
 import { Control, Controller } from "react-hook-form";
-import React from "react";
 import { StyledTextField } from "./style";
 
 interface IObject {

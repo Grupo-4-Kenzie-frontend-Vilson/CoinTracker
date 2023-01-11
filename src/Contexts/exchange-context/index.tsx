@@ -1,4 +1,4 @@
-import React, { createContext, useEffect, useState, useContext, SetStateAction } from "react";
+import React, { createContext, useState, SetStateAction } from "react";
 import { awesomeApi } from "../../Services/awesome-api";
 import { coinRankingApi } from "../../Services/coinranking-api";
 
