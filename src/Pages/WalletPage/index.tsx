@@ -1,22 +1,26 @@
-import { useContext } from "react"
+import { useContext, useEffect } from "react"
 import { Button } from "../../Components/Button"
 import { WalletContext } from "../../Contexts/wallet-context"
 import { StyledMain } from "./style"
 import { WalletCard } from "./WalletCard"
+import heartImg from "../../assets/heart.svg"
+import walletImg from "../../assets/mywallet.svg"
 
 export const WalletPage = () => {
-    const { userAssets, addAsset } = useContext(WalletContext)
+    const { userAssets, addAsset, fetchUserAssets } = useContext(WalletContext)
+    // useEffect(() => {
+    //     fetchUserAssets(1)    
+    // }, [])
 
     return (
         <StyledMain>
-            <h2>Adicionar a Carteira</h2>
-            <Button
-                type="button"
-            
-            >"Wallet"</Button>
+            <div>
+                <h2>Adicionar a Carteira</h2>
+                <img src={walletImg} alt="My Wallet Image" />
+            </div>
 
             <section>
-                <p>Component Graphic</p>
+                <img src={ heartImg } alt="Waiting Graphic" />
 
                 <ul>
                     {

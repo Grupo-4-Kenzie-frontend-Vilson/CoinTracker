@@ -10,7 +10,7 @@ interface iExchangeContext {
   allCoins: [] | iCoin[];
   favoriteCoins: iCoin[];
   setFavoriteCoins: React.Dispatch<SetStateAction<[] | iCoin[]>>;
-  dollarPrice: number | null;
+  dollarPrice: number;
   showOnlyFavCoins: boolean;
   setShowOnlyFavCoins: React.Dispatch<SetStateAction<boolean>>;
 }
@@ -21,16 +21,17 @@ interface iCoin {
   iconUrl: string;
   rank: string;
   symbol: string;
-  uuid: string;
+  uuid?: string;
 }
 
 export const ExchangeContext = createContext({} as iExchangeContext);
 
 export const ExchangeProvider = ({ children }: iExchangeContextProps) => {
-  const [allCoins, setAllCoins] = useState<[] | iCoin[]>([]);
-  const [favoriteCoins, setFavoriteCoins] = useState<[] | iCoin[]>([]);
-  const [dollarPrice, setDollarPrice] = useState<number | null>(null);
-  const [showOnlyFavCoins, setShowOnlyFavCoins] = useState<boolean>(false);
+
+  const [allCoins, setAllCoins]   = useState<[] | iCoin[]>([])
+  const [favoriteCoins, setFavoriteCoins]   = useState<[] | iCoin[]>([])
+  const [dollarPrice, setDollarPrice]   = useState<number>(5.2)
+  const [showOnlyFavCoins, setShowOnlyFavCoins] = useState<boolean>(false)
 
   async function fetchAllCoins() {
     try {
@@ -56,6 +57,7 @@ export const ExchangeProvider = ({ children }: iExchangeContextProps) => {
   }
 
   useEffect(() => {
+<<<<<<< HEAD
     fetchAllCoins();
   },[])
 
@@ -75,4 +77,12 @@ export const ExchangeProvider = ({ children }: iExchangeContextProps) => {
       {children}
     </ExchangeContext.Provider>
   );
+=======
+    fetchAllCoins()
+  }, [])
+  
+  fetchDollarPricing()
+  
+  return <ExchangeContext.Provider value={{allCoins, favoriteCoins, setFavoriteCoins, dollarPrice, showOnlyFavCoins, setShowOnlyFavCoins}}>{children}</ExchangeContext.Provider>;
+>>>>>>> 17c58c0212cd056c90b5ef56107c23259c6d470b
 };

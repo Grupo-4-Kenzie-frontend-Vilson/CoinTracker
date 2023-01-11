@@ -7,7 +7,6 @@ interface ICoinProps {
     cripto:{
         amount: number;
         coin: string;
-        coinId: string
         id: number;
         userId: number;
     }
@@ -16,7 +15,7 @@ interface ICoinProps {
 
 export const WalletCard = ({ cripto }:ICoinProps) => {
 
-    const { amount, coin, coinId, id, userId } = cripto
+    const { amount, coin, id, userId } = cripto
     const { editAsset, deleteAsset, fetchUserAssets } = useContext(WalletContext)
     
 
@@ -34,21 +33,11 @@ export const WalletCard = ({ cripto }:ICoinProps) => {
         <StyledCard>
             <div>
                 <h2>{coin}</h2>
-                <p>{amount}</p>
+                <p>R${amount}</p>
             </div>
             <div>
-                <Button
-                    type="button"
-                    onClick={EditCard}
-                >
-                    Editar
-                </Button>
-                <Button
-                    type="button"
-                    onClick={DeleteCard}
-                >
-                    Deletar
-                </Button>
+                <img src="" alt="" />
+                <img src="" alt="" />
             </div>
         </StyledCard>
     )
