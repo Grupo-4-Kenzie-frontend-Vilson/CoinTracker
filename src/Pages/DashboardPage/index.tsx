@@ -28,10 +28,6 @@ export const DashboardPage = () => {
     userRedirect();
   }, []);
 
-  useEffect(() => {
-    generatePieChartData();
-  }, [userAssets]);
-
   return (
     <StyledMain>
       <MainDiv />

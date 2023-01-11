@@ -16,6 +16,7 @@ interface iWalletContextValue {
   userAssets: [] | iUserAsset[];
   logout: () => void;
   generatePieChartData: () => void;
+  chartData: [] | iChartElement[];
   userId: number;
 }
 
@@ -140,6 +141,7 @@ export const WalletProvider = ({ children }: iWalletContextProps) => {
         deleteAsset,
         userAssets,
         logout,
+        chartData,
         userId,
       }}
     >

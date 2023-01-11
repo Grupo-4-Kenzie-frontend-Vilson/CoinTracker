@@ -6,6 +6,7 @@ import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { WalletContext } from "../../Contexts/wallet-context";
+import { StyledAddAssets } from "./style";
 
 interface iFormSubmit {
   coin: string;
@@ -65,11 +66,11 @@ export const AddAsset = () => {
   };
 
   return (
-    <div>
+    <StyledAddAssets>
       <button onClick={openModal}>
         <FaWallet />
       </button>
-      <Modal isOpen={open} onRequestClose={closeModal}>
+      <Modal isOpen={open} onRequestClose={closeModal} contentLabel="Example Modal" overlayClassName="modal-overlay" className="modal-content">
         <header>
           <h2>Adicionar a cripto</h2>
           <button onClick={closeModal}>X</button>
@@ -93,6 +94,6 @@ export const AddAsset = () => {
           <button type="submit">Adicionar</button>
         </form>
       </Modal>
-    </div>
+    </StyledAddAssets>
   );
 };
