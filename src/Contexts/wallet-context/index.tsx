@@ -1,6 +1,8 @@
-import React, { createContext, useState, useEffect } from "react";
+import { all } from "axios";
+import React, { createContext, useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { fakeApi } from "../../Services/fake-api";
+import { ExchangeContext } from "../exchange-context";
 
 interface iWalletContextProps {
   children: React.ReactNode;
@@ -13,6 +15,7 @@ interface iWalletContextValue {
   deleteAsset: (assetId: number) => Promise<void>;
   userAssets: [] | iUserAsset[];
   logout: () => void;
+  generatePieChartData: () => void;
 }
 
 interface iAddAssets {
@@ -31,6 +34,11 @@ interface iUserAsset {
   amount: number;
   id: number;
   userId: number;
+  coinId: string;
+}
+interface iChartElement{
+  x: string;
+  y: number;
 }
 
 export const WalletContext = createContext({} as iWalletContextValue);
@@ -38,8 +46,11 @@ export const WalletContext = createContext({} as iWalletContextValue);
 export const WalletProvider = ({ children }: iWalletContextProps) => {
   const navigate = useNavigate();
   const [userAssets, setUserAssets] = useState<[] | iUserAsset[]>([]);
+  const [chartData, setChartData] = useState<[] | iChartElement[]>([]);
 
   const userToken = window.localStorage.getItem("@userToken");
+
+  const {dollarPrice, allCoins} = useContext(ExchangeContext)
 
   const userIdLocalStorage = window.localStorage.getItem("@userId");
   const userId = Number(userIdLocalStorage);
@@ -106,14 +117,33 @@ export const WalletProvider = ({ children }: iWalletContextProps) => {
     navigate("/login");
   }
 
-  useEffect(() => {
-    fetchUserAssets(userId);
-  }, []);
+  function generatePieChartData() {
+    console.log(userAssets);
+    const newAssets =  userAssets.map(asset => { 
+      const coinPrice = allCoins.find( coin => coin.uuid === asset.coinId)!.price;
+      const coinName = asset.coin;
+      const amountValue = asset.amount * dollarPrice *  +coinPrice;
+      const newChartElement = {
+        x: coinName, 
+        y: amountValue
+      }
+     
+      return newChartElement
+    });
+    setChartData([...newAssets])
+    console.log(chartData)
+  }
+  
+  
+  
+
+
 
   return (
     <WalletContext.Provider
       value={{
         fetchUserAssets,
+        generatePieChartData,
         addAsset,
         editAsset,
         deleteAsset,

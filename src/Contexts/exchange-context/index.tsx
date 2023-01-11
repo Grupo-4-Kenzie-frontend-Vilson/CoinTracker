@@ -1,4 +1,4 @@
-import React, { createContext, useState, SetStateAction } from "react";
+import React, { createContext, useState, SetStateAction, useEffect } from "react";
 import { awesomeApi } from "../../Services/awesome-api";
 import { coinRankingApi } from "../../Services/coinranking-api";
 
@@ -10,7 +10,7 @@ interface iExchangeContext {
   allCoins: [] | iCoin[];
   favoriteCoins: iCoin[];
   setFavoriteCoins: React.Dispatch<SetStateAction<[] | iCoin[]>>;
-  dollarPrice: number | null;
+  dollarPrice: number;
   showOnlyFavCoins: boolean;
   setShowOnlyFavCoins: React.Dispatch<SetStateAction<boolean>>;
 }
@@ -21,16 +21,17 @@ interface iCoin {
   iconUrl: string;
   rank: string;
   symbol: string;
-  uuid: string;
+  uuid?: string;
 }
 
 export const ExchangeContext = createContext({} as iExchangeContext);
 
 export const ExchangeProvider = ({ children }: iExchangeContextProps) => {
-  const [allCoins, setAllCoins] = useState<[] | iCoin[]>([]);
-  const [favoriteCoins, setFavoriteCoins] = useState<[] | iCoin[]>([]);
-  const [dollarPrice, setDollarPrice] = useState<number | null>(null);
-  const [showOnlyFavCoins, setShowOnlyFavCoins] = useState<boolean>(false);
+
+  const [allCoins, setAllCoins]   = useState<[] | iCoin[]>([])
+  const [favoriteCoins, setFavoriteCoins]   = useState<[] | iCoin[]>([])
+  const [dollarPrice, setDollarPrice]   = useState<number>(5.2)
+  const [showOnlyFavCoins, setShowOnlyFavCoins] = useState<boolean>(false)
 
   async function fetchAllCoins() {
     try {
@@ -55,21 +56,11 @@ export const ExchangeProvider = ({ children }: iExchangeContextProps) => {
     }
   }
 
-  fetchAllCoins();
-  fetchDollarPricing();
-
-  return (
-    <ExchangeContext.Provider
-      value={{
-        allCoins,
-        favoriteCoins,
-        setFavoriteCoins,
-        dollarPrice,
-        showOnlyFavCoins,
-        setShowOnlyFavCoins,
-      }}
-    >
-      {children}
-    </ExchangeContext.Provider>
-  );
+  useEffect(() => {
+    fetchAllCoins()
+  }, [])
+  
+  fetchDollarPricing()
+  
+  return <ExchangeContext.Provider value={{allCoins, favoriteCoins, setFavoriteCoins, dollarPrice, showOnlyFavCoins, setShowOnlyFavCoins}}>{children}</ExchangeContext.Provider>;
 };
