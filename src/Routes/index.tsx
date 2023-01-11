@@ -1,6 +1,8 @@
 import { Navigate, Route, Routes } from "react-router-dom";
 import { MainHeader } from "../Components/MainHeader";
 import ProtectProviders from "../Contexts/protect-providers";
+import { UserProvider } from "../Contexts/user-context";
+import { WalletProvider } from "../Contexts/wallet-context";
 import { DashboardPage } from "../Pages/DashboardPage";
 import { LoginPage } from "../Pages/LoginPage";
 import { RegisterPage } from "../Pages/RegisterPage";
