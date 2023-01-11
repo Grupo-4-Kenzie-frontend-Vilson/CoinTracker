@@ -57,10 +57,9 @@ export const ExchangeProvider = ({ children }: iExchangeContextProps) => {
   }
 
   useEffect(() => {
-<<<<<<< HEAD
     fetchAllCoins();
   },[])
-
+  
   fetchDollarPricing();
 
   return (
@@ -77,12 +76,4 @@ export const ExchangeProvider = ({ children }: iExchangeContextProps) => {
       {children}
     </ExchangeContext.Provider>
   );
-=======
-    fetchAllCoins()
-  }, [])
-  
-  fetchDollarPricing()
-  
-  return <ExchangeContext.Provider value={{allCoins, favoriteCoins, setFavoriteCoins, dollarPrice, showOnlyFavCoins, setShowOnlyFavCoins}}>{children}</ExchangeContext.Provider>;
->>>>>>> 17c58c0212cd056c90b5ef56107c23259c6d470b
 };
