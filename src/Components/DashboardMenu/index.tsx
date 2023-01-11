@@ -1,8 +1,8 @@
 import { DivCenterContent, StyledH3, StyledMainDiv } from "./style"
-import { useMediaQuery } from 'react-responsive'
+import { useMediaQuery } from "react-responsive"
 
 export const MainDiv = () => {
-    const isBigScreen: boolean = useMediaQuery({query: '(min-width: 769px)'})
+    const isBigScreen: boolean = useMediaQuery({query: "(min-width: 769px)"})
 
     return (
         <StyledMainDiv>

@@ -4,8 +4,7 @@ import { Context } from 'vm'
 import { ExchangeContext } from '../../Contexts/exchange-context'
 
 export default function CoinsList(){
-    const { allCoins } = useContext(ExchangeContext) as Context
-    console.log(allCoins)
+    const { allCoins, favoriteCoins } = useContext(ExchangeContext) as Context
 
     return (
         <StyledList>
