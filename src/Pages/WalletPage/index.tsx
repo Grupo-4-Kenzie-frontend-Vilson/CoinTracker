@@ -7,7 +7,7 @@ import heartImg from "../../assets/heart.svg"
 import walletImg from "../../assets/mywallet.svg"
 
 export const WalletPage = () => {
-    const { userAssets, addAsset, fetchUserAssets, userId } = useContext(WalletContext)
+    const { userAssets, addAsset, fetchUserAssets, userId, generatePieChartData } = useContext(WalletContext)
     useEffect(() => {
         fetchUserAssets(1)    
     }, [])
@@ -24,42 +24,51 @@ export const WalletPage = () => {
         addAsset(data)
     }
 
+    useEffect(() => {
+        generatePieChartData()
+    }, [userAssets])
+
     return (
         <StyledMain>
-            <div>
-                <h2>Adicionar a Carteira</h2>
-                <img src={walletImg} alt="My Wallet Image"
-                    onClick={AddCripto}
-                />
+            <div className="container">
+                <div className="divTitle">
+                    <h2>Adicionar a Carteira</h2>
+                    <img src={walletImg} alt="My Wallet Image"
+                        onClick={AddCripto}
+                    />
+                </div>
+
+                <section>
+                    <div className="pieChart">
+                        <img src={ heartImg } alt="Waiting Graphic" />
+                    </div>
+
+                    <ul>
+                        {
+                            userAssets.length != 0 ?
+
+                            (
+                                userAssets.map((Cripto, index) => {
+                                    return <WalletCard key={index} cripto={Cripto}/>
+                                })
+                            )
+                            :
+                            (
+                                <div>
+                                    <h2>Sua carteira está vazia</h2>
+                                    <Button
+                                        type="button"
+                                    >
+                                        Adicionar Cripto
+                                    </Button> 
+                                </div>
+                            )
+                        }
+
+                    </ul>
+                </section>
             </div>
-
-            <section>
-                <img src={ heartImg } alt="Waiting Graphic" />
-
-                <ul>
-                    {
-                        userAssets.length != 0 ?
-                        
-                        (
-                            userAssets.map((Cripto, index) => {
-                                return <WalletCard key={index} cripto={Cripto}/>
-                            })
-                        )
-                        :
-                        (
-                            <div>
-                                <h2>Sua carteira está vazia</h2>
-                                <Button
-                                    type="button"
-                                >
-                                    Adicionar Cripto
-                                </Button> 
-                            </div>
-                        )
-                    }
-                    
-                </ul>
-            </section>
+            
         </StyledMain>
     )
 }
