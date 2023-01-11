@@ -7,10 +7,14 @@ import { StyledMain } from "./style";
 import { WalletContext } from "../../Contexts/wallet-context";
 
 export const DashboardPage = () => {
+
   const userId = Number(localStorage.getItem("@userId"));
   const { generatePieChartData, fetchUserAssets, userAssets } =
     useContext(WalletContext);
+    
   const navigate = useNavigate();
+  const userId = window.localStorage.getItem("@userId");
+
   function userRedirect() {
     if (window.localStorage.getItem("@userToken")) {
     } else {
@@ -19,7 +23,8 @@ export const DashboardPage = () => {
   }
 
   useEffect(() => {
-    fetchUserAssets(userId);
+    fetchUserAssets(Number(userId));
+
     userRedirect();
   }, []);
 

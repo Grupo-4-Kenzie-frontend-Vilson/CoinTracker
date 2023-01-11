@@ -18,7 +18,7 @@ Modal.setAppElement("#root");
 
 export const AddAsset = () => {
   const { allCoins } = useContext(ExchangeContext);
-  const { addAsset, fetchUserAssets } = useContext(WalletContext);
+  const { addAsset, fetchUserAssets, userAssets } = useContext(WalletContext);
   const [open, setOpen] = useState(false);
 
   const userId = window.localStorage.getItem("@userId");
@@ -54,6 +54,16 @@ export const AddAsset = () => {
     closeModal();
   }
 
+  const disable = (symbol: string) => {
+    const findCoin = userAssets.find((e) => e.coin === symbol);
+
+    if (findCoin) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
   return (
     <div>
       <button onClick={openModal}>
@@ -70,7 +80,11 @@ export const AddAsset = () => {
               Selecionar cripto
             </option>
             {allCoins.map((coin, index) => (
-              <option key={index} value={coin.uuid}>
+              <option
+                key={index}
+                value={coin.uuid}
+                hidden={disable(coin.symbol)}
+              >
                 {coin.symbol}
               </option>
             ))}
