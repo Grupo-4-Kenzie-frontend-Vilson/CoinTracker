@@ -5,13 +5,21 @@ interface iWalletContextProps {
   children: React.ReactNode;
 }
 
+interface iWalletContextValue {
+  fetchUserAssets: (userId: number) => Promise<void>;
+  addAsset: (data: iAddAssets) => Promise<void>;
+  editAsset: (data: iEditAsset, assetId: number) => Promise<void>;
+  deleteAsset: (assetId: number) => Promise<void>;
+  userAssets: [] | iUserAsset[];
+}
+
 interface iAddAssets {
   coin: string;
   amount: number;
   userId: number;
 }
 
-interface iEditAssets {
+interface iEditAsset {
   amount: number;
 }
 
@@ -22,7 +30,7 @@ interface iUserAsset {
   userId: number;
 }
 
-export const WalletContext = createContext({});
+export const WalletContext = createContext({} as iWalletContextValue);
 
 export const WalletProvider = ({ children }: iWalletContextProps) => {
   const [userAssets, setUserAssets] = useState<[] | iUserAsset[]>([]);
@@ -63,7 +71,7 @@ export const WalletProvider = ({ children }: iWalletContextProps) => {
     }
   }
 
-  async function editAsset(data: iEditAssets, assetId: number) {
+  async function editAsset(data: iEditAsset, assetId: number) {
     try {
       const fetch = await fakeApi.patch(
         `/assets/${assetId}`,
@@ -93,5 +101,11 @@ export const WalletProvider = ({ children }: iWalletContextProps) => {
     fetchUserAssets(userId);
   }, []);
 
-  return <WalletContext.Provider value={{}}>{children}</WalletContext.Provider>;
+  return (
+    <WalletContext.Provider
+      value={{ fetchUserAssets, addAsset, editAsset, deleteAsset, userAssets }}
+    >
+      {children}
+    </WalletContext.Provider>
+  );
 };
