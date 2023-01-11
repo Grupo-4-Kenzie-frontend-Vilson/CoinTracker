@@ -20,6 +20,7 @@ interface iWalletContextValue {
 
 interface iAddAssets {
   coin: string;
+  coinId: string;
   amount: number;
   userId: number;
 }

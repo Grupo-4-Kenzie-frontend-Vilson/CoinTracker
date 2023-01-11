@@ -2,6 +2,7 @@ import CoinsList from "../../Components/CoinsList";
 import { MainDiv } from "../../Components/DashboardMenu";
 import { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { AddAsset } from "../../Components/AddAsset";
 import { StyledMain } from "./style";
 import { WalletContext } from "../../Contexts/wallet-context";
 
@@ -31,6 +32,8 @@ export const DashboardPage = () => {
     <StyledMain>
       <MainDiv />
       <CoinsList />
+      <h1>Dashboard</h1>
+      <AddAsset />
     </StyledMain>
   );
 };
