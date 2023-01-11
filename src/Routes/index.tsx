@@ -6,6 +6,7 @@ import { WalletProvider } from "../Contexts/wallet-context";
 import { DashboardPage } from "../Pages/DashboardPage";
 import { LoginPage } from "../Pages/LoginPage";
 import { RegisterPage } from "../Pages/RegisterPage";
+import { WalletPage } from "../Pages/WalletPage";
 
 export const MainRoutes = () => {
   return (
@@ -20,7 +21,7 @@ export const MainRoutes = () => {
         }
       >
         <Route path="/dashboard" element={<DashboardPage />} />
-        <Route path="/wallet" element={<h1>Ola</h1>} />
+        <Route path="/wallet" element={<WalletPage />} />
       </Route>
       <Route path="*" element={<Navigate to="/login" />} />
     </Routes>

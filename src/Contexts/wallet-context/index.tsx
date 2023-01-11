@@ -16,6 +16,7 @@ interface iWalletContextValue {
   userAssets: [] | iUserAsset[];
   logout: () => void;
   generatePieChartData: () => void;
+  userId: number
 }
 
 interface iAddAssets {
@@ -68,7 +69,6 @@ export const WalletProvider = ({ children }: iWalletContextProps) => {
       console.log(err);
     }
   }
-
   console.log(userAssets);
 
   async function addAsset(data: iAddAssets) {
@@ -149,6 +149,7 @@ export const WalletProvider = ({ children }: iWalletContextProps) => {
         deleteAsset,
         userAssets,
         logout,
+        userId
       }}
     >
       {children}
