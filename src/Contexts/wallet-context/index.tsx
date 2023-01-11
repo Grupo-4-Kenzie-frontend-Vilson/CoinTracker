@@ -16,7 +16,7 @@ interface iWalletContextValue {
   userAssets: [] | iUserAsset[];
   logout: () => void;
   generatePieChartData: () => void;
-  userId: number
+  userId: number;
 }
 
 interface iAddAssets {
@@ -37,7 +37,7 @@ interface iUserAsset {
   userId: number;
   coinId: string;
 }
-interface iChartElement{
+interface iChartElement {
   x: string;
   y: number;
 }
@@ -51,7 +51,7 @@ export const WalletProvider = ({ children }: iWalletContextProps) => {
 
   const userToken = window.localStorage.getItem("@userToken");
 
-  const {dollarPrice, allCoins} = useContext(ExchangeContext)
+  const { dollarPrice, allCoins } = useContext(ExchangeContext);
 
   const userIdLocalStorage = window.localStorage.getItem("@userId");
   const userId = Number(userIdLocalStorage);
@@ -63,13 +63,11 @@ export const WalletProvider = ({ children }: iWalletContextProps) => {
           Authorization: `Bearer ${userToken}`,
         },
       });
-      console.log(fetch);
       setUserAssets(fetch.data.assets);
     } catch (err) {
       console.log(err);
     }
   }
-  console.log(userAssets);
 
   async function addAsset(data: iAddAssets) {
     try {
@@ -80,7 +78,6 @@ export const WalletProvider = ({ children }: iWalletContextProps) => {
           headers: { Authorization: `Bearer ${userToken}` },
         }
       );
-      console.log(fetch);
     } catch (err) {
       console.log(err);
     }
@@ -95,7 +92,6 @@ export const WalletProvider = ({ children }: iWalletContextProps) => {
           headers: { Authorization: `Bearer ${userToken}` },
         }
       );
-      console.log(fetch);
     } catch (err) {
       console.log(err);
     }
@@ -118,26 +114,21 @@ export const WalletProvider = ({ children }: iWalletContextProps) => {
   }
 
   function generatePieChartData() {
-    console.log(userAssets);
-    const newAssets =  userAssets.map(asset => { 
-      const coinPrice = allCoins.find( coin => coin.uuid === asset.coinId)!.price;
+    const newAssets = userAssets.map((asset) => {
+      const coinPrice = allCoins.find(
+        (coin) => coin.uuid === asset.coinId
+      )!.price;
       const coinName = asset.coin;
-      const amountValue = asset.amount * dollarPrice *  +coinPrice;
+      const amountValue = asset.amount * dollarPrice * +coinPrice;
       const newChartElement = {
-        x: coinName, 
-        y: amountValue
-      }
-     
-      return newChartElement
+        x: coinName,
+        y: amountValue,
+      };
+
+      return newChartElement;
     });
-    setChartData([...newAssets])
-    console.log(chartData)
+    setChartData([...newAssets]);
   }
-  
-  
-  
-
-
 
   return (
     <WalletContext.Provider
@@ -149,7 +140,7 @@ export const WalletProvider = ({ children }: iWalletContextProps) => {
         deleteAsset,
         userAssets,
         logout,
-        userId
+        userId,
       }}
     >
       {children}
