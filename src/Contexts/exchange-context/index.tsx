@@ -1,4 +1,4 @@
-import React, { createContext, useEffect, useState, useContext, SetStateAction } from "react";
+import React, { createContext, useState, SetStateAction } from "react";
 import { awesomeApi } from "../../Services/awesome-api";
 import { coinRankingApi } from "../../Services/coinranking-api";
 
@@ -7,9 +7,9 @@ interface iExchangeContextProps {
 }
 
 interface iExchangeContext {
-  allCoins: [] | iCoin[]; 
-  favoriteCoins: iCoin[]; 
-  setFavoriteCoins: React.Dispatch<SetStateAction<[] | iCoin[]>>; 
+  allCoins: [] | iCoin[];
+  favoriteCoins: iCoin[];
+  setFavoriteCoins: React.Dispatch<SetStateAction<[] | iCoin[]>>;
   dollarPrice: number | null;
   showOnlyFavCoins: boolean;
   setShowOnlyFavCoins: React.Dispatch<SetStateAction<boolean>>;
@@ -22,7 +22,6 @@ interface iCoin {
   rank: string;
   symbol: string;
 }
-
 
 export const ExchangeContext = createContext({} as iExchangeContext);
 
@@ -37,7 +36,8 @@ export const ExchangeProvider = ({ children }: iExchangeContextProps) => {
     try {
       const fetch = await coinRankingApi.get(`/coins?scopeLimit=20`, {
         headers: {
-          'x-access-token': 'coinranking4b49976245587b192ea41f41cb9c2d69147a79a9bb66f6d4'       
+          "x-access-token":
+            "coinranking4b49976245587b192ea41f41cb9c2d69147a79a9bb66f6d4",
         },
       });
       setAllCoins(fetch.data.data.coins);

@@ -11,17 +11,6 @@ interface iUserContextValue {
   fetchRegister: (data: iFetchRegister) => Promise<void>;
 }
 
-interface iUser {
-  email: string;
-  name: string;
-  phone: string;
-  id: number;
-}
-interface iUserInfo {
-  accessToken: string;
-  user: iUser;
-}
-
 interface iFetchLogin {
   email: string;
   password: string;
@@ -46,6 +35,7 @@ export const UserProvider = ({ children }: iUserContextProps) => {
       });
       window.localStorage.setItem("@userToken", fetch.data.accessToken);
       window.localStorage.setItem("@userId", fetch.data.user.id);
+      navigate("/dashboard");
     } catch (err) {
       console.log(err);
     }
@@ -56,7 +46,7 @@ export const UserProvider = ({ children }: iUserContextProps) => {
       const fetch = await fakeApi.post("/register", {
         ...data,
       });
-      console.log(fetch);
+      navigate("/login");
     } catch (err) {
       console.log(err);
     }

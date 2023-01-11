@@ -3,9 +3,6 @@ import { GlobalStyles } from "./Styles";
 
 function App() {
   return (
-    // <div className="App">
-    //   //Time to Code.
-    // </div>
     <>
       <MainRoutes />
       <GlobalStyles />

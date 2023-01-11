@@ -1,6 +1,5 @@
 import { Navigate, Route, Routes } from "react-router-dom";
 import { MainHeader } from "../Components/MainHeader";
-import { ExchangeProvider } from "../Contexts/exchange-context";
 import ProtectProviders from "../Contexts/protect-providers";
 import { UserProvider } from "../Contexts/user-context";
 import { WalletProvider } from "../Contexts/wallet-context";
@@ -11,11 +10,10 @@ import { RegisterPage } from "../Pages/RegisterPage";
 export const MainRoutes = () => {
   return (
     <Routes>
+      <Route path="/" element={<Navigate to="/login" />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/register" element={<RegisterPage />} />
-      <Route
-        path="/"
-        element={
+      <Route path="/" element={
           <ProtectProviders>
             <MainHeader />
           </ProtectProviders>
