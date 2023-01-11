@@ -1,9 +1,12 @@
+import CoinsList from "../../Components/CoinsList";
+import { MainDiv } from "../../Components/DashboardMenu";
 import { StyledMain } from "./style";
 
 export const DashboardPage = () => {
   return (
     <StyledMain>
-      <h1>Dashboard</h1>
+      <MainDiv />
+      <CoinsList />
     </StyledMain>
   );
 };
