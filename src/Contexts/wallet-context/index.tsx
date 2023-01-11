@@ -10,6 +10,7 @@ interface iWalletContextValue {
   addAsset: (data: iAddAssets) => Promise<void>;
   editAsset: (data: iEditAsset, assetId: number) => Promise<void>;
   deleteAsset: (assetId: number) => Promise<void>;
+  userAssets: [] | iUserAsset[];
 }
 
 interface iAddAssets {
@@ -102,7 +103,7 @@ export const WalletProvider = ({ children }: iWalletContextProps) => {
 
   return (
     <WalletContext.Provider
-      value={{ fetchUserAssets, addAsset, editAsset, deleteAsset }}
+      value={{ fetchUserAssets, addAsset, editAsset, deleteAsset, userAssets }}
     >
       {children}
     </WalletContext.Provider>
