@@ -24,7 +24,7 @@ export const CardCripto = ({
   const { favoriteCoins, setFavoriteCoins } = useContext(ExchangeContext);
 
   const addFavorite = () => {
-    console.log(favoriteCoins.find((coin) => coin.uuid === uuid));
+    favoriteCoins.find((coin) => coin.uuid === uuid);
 
     setFavoriteCoins([
       ...favoriteCoins,
