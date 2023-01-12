@@ -11,7 +11,7 @@ export const MainDiv = () => {
     return (
         <StyledMainDiv>
             <DivCenterContent>
-                <StyledH3>Crypto Coins</StyledH3>
+                <StyledH3>Moedas em Alta</StyledH3>
             </DivCenterContent>
             <DivCenterContent>
                 <StyledClickable >
