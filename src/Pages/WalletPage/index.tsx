@@ -43,7 +43,7 @@ export const WalletPage = () => {
             </div>
 
             <section>
-                <VictoryPie data={chartData}/>
+                <VictoryPie data={chartData} animate={{duration: 2000}} colorScale={["tomato", "orange", "gold", "cyan", "navy" ]}  innerRadius={({ datum }) => datum.y * 20}/>
 
                 <ul>
                     {
