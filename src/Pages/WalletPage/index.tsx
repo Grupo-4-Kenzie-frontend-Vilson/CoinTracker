@@ -5,15 +5,21 @@ import { StyledMain } from "./style";
 import { WalletCard } from "./WalletCard";
 import heartImg from "../../assets/heart.svg";
 import { AddAsset } from "../../Components/AddAsset";
+import { VictoryPie } from 'victory'
+
 
 export const WalletPage = () => {
 
-    const { userAssets, fetchUserAssets, userId} = useContext(WalletContext)
+    const { userAssets, fetchUserAssets, userId, chartData, generatePieChartData } = useContext(WalletContext)
     useEffect(() => {
         fetchUserAssets(userId)    
     }, [])
-  
 
+    useEffect(() => {
+        generatePieChartData();
+      }, [userAssets]);
+  
+      console.log(userAssets)
   return (
     <StyledMain>
         <div className="container">
@@ -24,7 +30,7 @@ export const WalletPage = () => {
 
             <section>
                 <div className="pieChart">
-                    <img src={heartImg} alt="Waiting Graphic" />
+                    <VictoryPie data={chartData} animate={{duration: 2000}} colorScale={["tomato", "orange", "gold", "cyan", "navy" ]}  innerRadius={({ datum }) => datum.y * 20}/>
                 </div>
 
               <ul>

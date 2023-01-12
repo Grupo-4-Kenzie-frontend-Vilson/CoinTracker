@@ -42,7 +42,7 @@ export const StyledMain = styled.main`
     }
 
     .pieChart {
-        width: 200px;
+        width: 100%;
 
         display: flex;
         align-items: center;
