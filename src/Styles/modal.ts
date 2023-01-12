@@ -37,6 +37,29 @@ export const Modal = createGlobalStyle`
     }
 }
 
+.modalEdit{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    input{
+        width: 80%;
+        max-width: 583px;
+    height: 44px;
+    background-color: var(--color-gray);
+    border: none;
+    border-radius: 14px;
+    padding: 10px;
+    }
+    button{
+        height: 44px;
+        width: 70px;
+        background-color: var(--color-gray);
+        border-radius: 14px;
+        font-size: 16px;
+        cursor: pointer;
+    }
+}
+
 .formModal{
     margin-top: 20px;
     display: flex;
@@ -97,6 +120,5 @@ export const Modal = createGlobalStyle`
     border-radius: 5px;
     background-color: var(--color-primary);
     padding: 20px;
-
 }
 `;
