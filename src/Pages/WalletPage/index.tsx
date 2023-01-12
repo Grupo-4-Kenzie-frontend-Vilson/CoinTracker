@@ -4,27 +4,15 @@ import { WalletContext } from "../../Contexts/wallet-context";
 import { StyledMain } from "./style";
 import { WalletCard } from "./WalletCard";
 import heartImg from "../../assets/heart.svg";
-import walletImg from "../../assets/mywallet.svg";
 import { AddAsset } from "../../Components/AddAsset";
 
 export const WalletPage = () => {
-  const { userAssets, addAsset, fetchUserAssets, userId } =
-    useContext(WalletContext);
-  useEffect(() => {
-    fetchUserAssets(1);
-  }, []);
 
-  const AddCripto = () => {
-    const data = {
-      amount: 1.3,
-      coin: "ETH",
-      coinId: "razxDUgYGNAdQ",
-      userId: userId,
-      id: userAssets.length,
-    };
-
-    addAsset(data);
-  };
+    const { userAssets, fetchUserAssets, userId} = useContext(WalletContext)
+    useEffect(() => {
+        fetchUserAssets(userId)    
+    }, [])
+  
 
   return (
     <StyledMain>
@@ -52,3 +40,4 @@ export const WalletPage = () => {
     </StyledMain>
   );
 };
+

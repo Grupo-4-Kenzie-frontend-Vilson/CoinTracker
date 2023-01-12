@@ -1,15 +1,23 @@
 import styled from "styled-components";
 
 export const StyledMain = styled.main`
-    color: var(--color-white);
+    width: 100%;
+    margin-bottom: 2rem;
 
-    height: 80vh;
-    
     display: flex;
-    flex-direction: column;
+    justify-content: center;
 
-    & > div {
-        max-width: 90%;
+    .container {
+        width: 1080px;
+        max-width: 100%;
+        
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .divTitle {
+        max-width: 100%;
 
         display: flex;
         align-items: center;
@@ -17,11 +25,13 @@ export const StyledMain = styled.main`
 
         gap: 1rem;
         margin-top: 1rem;
+        margin-left: 1rem;
+
+        color: var(--color-white);
     }
 
-    & > section {
-        width: 850px;
-        max-width: 100%;
+    .container > section {
+        width: 90%;
 
         display: flex;
         flex-direction: column;
@@ -30,14 +40,21 @@ export const StyledMain = styled.main`
         margin-top: 2rem;
         gap: 2rem;
     }
-    
-    & > section > img {
-        width: 200px;
+
+    .pieChart {
+        width: 300px;
+        display: flex;
+        align-items: center;
+
+    }
+    .pieChart > img {
+        width: 100%;
         background-color: red;
     }
     
-    & > section > ul {
+    .container > section > ul {
         max-width: 90%;
+        max-height: 400px;
         width: 755px;
         
         display: flex;
@@ -45,22 +62,24 @@ export const StyledMain = styled.main`
         align-items: center;
         
         gap: 1rem;
+        margin-top: 3rem;
+
+        overflow: auto;
     }
 
     @media (min-width: 750px) {
-        & > div {
-            align-self: flex-start;
-            margin-left: 4rem;
-        }
 
-        & > section {
+        .divTitle {
+            align-self: flex-start;
+        }
+        
+        .container > section {
             flex-direction: row;
             justify-content: space-between;
-            align-self: center;
         }
 
-        & > section > ul {
-            width: 60%;
+        .container > section > ul {
+            width: 50%;
         }
     }   
 `   
