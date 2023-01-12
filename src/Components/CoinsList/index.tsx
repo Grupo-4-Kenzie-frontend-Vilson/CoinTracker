@@ -7,6 +7,8 @@ export default function CoinsList() {
   const { allCoins, favoriteCoins, showOnlyFavCoins } =
     useContext(ExchangeContext);
 
+  console.log(favoriteCoins);
+
   return (
     <StyledList>
       {showOnlyFavCoins

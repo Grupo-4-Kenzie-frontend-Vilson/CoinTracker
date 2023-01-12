@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { StyledCardCripto } from "./style";
 import favorite from "../../assets/favorite.svg";
 import noFavorite from "../../assets/noFavorite.svg";
@@ -23,8 +23,10 @@ export const CardCripto = ({
 }: iCardCripto) => {
   const { favoriteCoins, setFavoriteCoins } = useContext(ExchangeContext);
 
+  const [favorited, setFavorited] = useState(false);
+
   const addFavorite = () => {
-    favoriteCoins.find((coin) => coin.uuid === uuid);
+    setFavorited(true);
 
     setFavoriteCoins([
       ...favoriteCoins,
@@ -37,6 +39,20 @@ export const CardCripto = ({
         uuid,
       },
     ]);
+  };
+
+  const removeFavorite = () => {
+    setFavorited(false);
+
+    const favoriteForRemove = favoriteCoins.find((coin) => coin.uuid === uuid);
+
+    const newFavoritecoins = favoriteCoins.filter(
+      (coin) => coin !== favoriteForRemove
+    );
+
+    console.log(newFavoritecoins);
+
+    setFavoriteCoins(newFavoritecoins);
   };
 
   return (
@@ -58,9 +74,25 @@ export const CardCripto = ({
       </div>
 
       <div className="rigth-side">
-        <button onClick={() => addFavorite()}>
-          <img src={favorite} alt="" />
-        </button>
+        {favorited ? (
+          <button
+            onClick={() => {
+              removeFavorite();
+              console.log("remove");
+            }}
+          >
+            <img src={favorite} alt="" />
+          </button>
+        ) : (
+          <button
+            onClick={() => {
+              addFavorite();
+              console.log("add");
+            }}
+          >
+            <img src={noFavorite} alt="" />
+          </button>
+        )}
       </div>
     </StyledCardCripto>
   );
