@@ -42,11 +42,12 @@ export const StyledMain = styled.main`
     }
 
     .pieChart {
-        width: 300px;
+        width: 200px;
+
         display: flex;
         align-items: center;
-
     }
+    
     .pieChart > img {
         width: 100%;
         background-color: red;
