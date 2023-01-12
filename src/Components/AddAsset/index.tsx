@@ -6,7 +6,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { WalletContext } from "../../Contexts/wallet-context";
 import { StyledAddAsset } from "./style";
-import wallet from "../../assets/mywallet.png"
+import wallet from "../../assets/mywallet.png";
 
 interface iFormSubmit {
   coin: string;
@@ -43,14 +43,14 @@ export const AddAsset = () => {
     formState: { errors },
   } = useForm({ resolver: yupResolver(formSchema) });
 
-  function formSubmit(data: any) {
+  async function formSubmit(data: any) {
     const filterCoin = allCoins.filter((e) => e.uuid === data.coinId);
     data = {
       coin: filterCoin[0].symbol,
       userId: Number(userId),
       ...data,
     };
-    addAsset(data);
+    await addAsset(data);
     fetchUserAssets(Number(userId));
     closeModal();
   }
@@ -67,9 +67,8 @@ export const AddAsset = () => {
 
   return (
     <StyledAddAsset>
-      
-        <img onClick={openModal} src={wallet} alt="carteira" />
-      
+      <img onClick={openModal} src={wallet} alt="carteira" />
+
       <Modal
         isOpen={open}
         onRequestClose={closeModal}

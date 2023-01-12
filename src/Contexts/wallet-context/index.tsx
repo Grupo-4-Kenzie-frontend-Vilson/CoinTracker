@@ -3,6 +3,9 @@ import React, { createContext, useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { fakeApi } from "../../Services/fake-api";
 import { ExchangeContext } from "../exchange-context";
+import { toast } from "react-toastify";
+
+import "react-toastify/dist/ReactToastify.css";
 
 interface iWalletContextProps {
   children: React.ReactNode;
@@ -79,6 +82,10 @@ export const WalletProvider = ({ children }: iWalletContextProps) => {
           headers: { Authorization: `Bearer ${userToken}` },
         }
       );
+      toast.success("Adicionado com sucesso!", {
+        position: "top-right",
+        autoClose: 2000,
+      });
     } catch (err) {
       console.log(err);
     }
@@ -93,6 +100,10 @@ export const WalletProvider = ({ children }: iWalletContextProps) => {
           headers: { Authorization: `Bearer ${userToken}` },
         }
       );
+      toast.success("Editado com sucesso!", {
+        position: "top-right",
+        autoClose: 2000,
+      });
     } catch (err) {
       console.log(err);
     }
@@ -102,6 +113,10 @@ export const WalletProvider = ({ children }: iWalletContextProps) => {
     try {
       const fetch = await fakeApi.delete(`/assets/${assetId}`, {
         headers: { Authorization: `Bearer ${userToken}` },
+      });
+      toast.success("Deletado com sucesso!", {
+        position: "top-right",
+        autoClose: 2000,
       });
     } catch (err) {
       console.log(err);

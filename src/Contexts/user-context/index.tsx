@@ -1,6 +1,9 @@
 import { createContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { fakeApi } from "../../Services/fake-api";
+import { toast } from "react-toastify";
+
+import "react-toastify/dist/ReactToastify.css";
 
 interface iUserContextProps {
   children: React.ReactNode;
@@ -33,11 +36,21 @@ export const UserProvider = ({ children }: iUserContextProps) => {
       const fetch = await fakeApi.post("/login", {
         ...data,
       });
+      toast.success("Login efetuado com sucesso!", {
+        position: "top-right",
+        autoClose: 2000,
+      });
       window.localStorage.setItem("@userToken", fetch.data.accessToken);
       window.localStorage.setItem("@userId", fetch.data.user.id);
-      navigate("/dashboard");
+      setTimeout(() => {
+        navigate("/dashboard");
+      }, 2000);
     } catch (err) {
       console.log(err);
+      toast.error("Algo deu errado", {
+        position: "top-right",
+        autoClose: 2000,
+      });
     }
   }
 
@@ -46,17 +59,21 @@ export const UserProvider = ({ children }: iUserContextProps) => {
       const fetch = await fakeApi.post("/register", {
         ...data,
       });
-      navigate("/login");
+      toast.success("Registro efetuado com sucesso!", {
+        position: "top-right",
+        autoClose: 2000,
+      });
+      setTimeout(() => {
+        navigate("/login");
+      }, 2000);
     } catch (err) {
+      toast.error("Algo deu errado", {
+        position: "top-right",
+        autoClose: 2000,
+      });
       console.log(err);
     }
   }
-
-  async function autoLogin() {}
-
-  useEffect(() => {
-    autoLogin();
-  }, []);
 
   return (
     <UserContext.Provider value={{ fetchLogin, fetchRegister }}>
