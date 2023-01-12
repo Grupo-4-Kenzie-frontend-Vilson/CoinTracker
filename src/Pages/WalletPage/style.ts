@@ -65,7 +65,13 @@ export const StyledMain = styled.main`
         gap: 1rem;
         margin-top: 3rem;
 
-        overflow: auto;
+        
+        overflow-y: scroll;
+        scrollbar-width: none;
+
+        &::-webkit-scrollbar{
+            display: none;
+        }
     }
 
     @media (min-width: 750px) {

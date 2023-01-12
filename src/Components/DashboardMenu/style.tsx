@@ -32,3 +32,7 @@ font-size: 36px;
 line-height: 54px;
 color: #FFFFFF;
 `
+
+export const StyledClickable = styled.div`
+cursor: pointer;
+`

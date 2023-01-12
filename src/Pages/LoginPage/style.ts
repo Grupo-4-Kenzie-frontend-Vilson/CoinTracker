@@ -7,7 +7,6 @@ export const StyledMain = styled.main`
   font-weight: 700;
   font-size: 40px;
   height: 100vh;
-
   @media (max-width: 900px) {
     flex-direction: column;
   }
@@ -19,7 +18,8 @@ export const StyledSectionAnimation = styled.section`
   height: 100%;
   display: flex;
   position: relative;
-
+  align-items: center;
+  
   .wave {
     position: absolute;
     right: -140px;
