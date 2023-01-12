@@ -1,4 +1,9 @@
-import React, { createContext, useEffect, useState, useContext, SetStateAction } from "react";
+import React, {
+  createContext,
+  useState,
+  SetStateAction,
+  useEffect,
+} from "react";
 import { awesomeApi } from "../../Services/awesome-api";
 import { coinRankingApi } from "../../Services/coinranking-api";
 
@@ -7,10 +12,12 @@ interface iExchangeContextProps {
 }
 
 interface iExchangeContext {
-  allCoins: [] | iCoin[]; 
-  favoriteCoins: iCoin[]; 
-  setFavoriteCoins: React.Dispatch<SetStateAction<[] | iCoin[]>>; 
-  dollarPrice: number | null;
+  allCoins: [] | iCoin[];
+  favoriteCoins: iCoin[];
+  setFavoriteCoins: React.Dispatch<SetStateAction<[] | iCoin[]>>;
+  dollarPrice: number;
+  showOnlyFavCoins: boolean;
+  setShowOnlyFavCoins: React.Dispatch<SetStateAction<boolean>>;
 }
 
 interface iCoin {
@@ -19,27 +26,27 @@ interface iCoin {
   iconUrl: string;
   rank: string;
   symbol: string;
+  uuid?: string;
 }
-
 
 export const ExchangeContext = createContext({} as iExchangeContext);
 
 export const ExchangeProvider = ({ children }: iExchangeContextProps) => {
-
-  const [allCoins, setAllCoins]   = useState<[] | iCoin[]>([])
-  const [favoriteCoins, setFavoriteCoins]   = useState<[] | iCoin[]>([])
-  const [dollarPrice, setDollarPrice]   = useState<number | null>(null)
-  
+  const [allCoins, setAllCoins] = useState<[] | iCoin[]>([]);
+  const [favoriteCoins, setFavoriteCoins] = useState<[] | iCoin[]>([]);
+  const [dollarPrice, setDollarPrice] = useState<number>(5.2);
+  const [showOnlyFavCoins, setShowOnlyFavCoins] = useState<boolean>(false);
 
   async function fetchAllCoins() {
     try {
       const fetch = await coinRankingApi.get(`/coins?scopeLimit=20`, {
         headers: {
-          'x-access-token': 'coinranking4b49976245587b192ea41f41cb9c2d69147a79a9bb66f6d4'       
+          "x-access-token":
+            "coinranking4b49976245587b192ea41f41cb9c2d69147a79a9bb66f6d4",
         },
       });
-      console.log(fetch.data.data.coins);
       setAllCoins(fetch.data.data.coins);
+      console.log(allCoins);
     } catch (err) {
       console.log(err);
     }
@@ -48,15 +55,30 @@ export const ExchangeProvider = ({ children }: iExchangeContextProps) => {
   async function fetchDollarPricing() {
     try {
       const fetch = await awesomeApi.get(``);
-      console.log(fetch.data.USDBRL.ask);
       setDollarPrice(fetch.data.USDBRL.ask);
     } catch (err) {
       console.log(err);
     }
   }
 
-  fetchAllCoins()
-  fetchDollarPricing()
-  
-  return <ExchangeContext.Provider value={{allCoins, favoriteCoins, setFavoriteCoins, dollarPrice}}>{children}</ExchangeContext.Provider>;
+  useEffect(() => {
+    fetchAllCoins();
+  }, []);
+
+  fetchDollarPricing();
+
+  return (
+    <ExchangeContext.Provider
+      value={{
+        allCoins,
+        favoriteCoins,
+        setFavoriteCoins,
+        dollarPrice,
+        showOnlyFavCoins,
+        setShowOnlyFavCoins,
+      }}
+    >
+      {children}
+    </ExchangeContext.Provider>
+  );
 };

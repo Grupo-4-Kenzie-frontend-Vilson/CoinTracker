@@ -23,4 +23,9 @@ flex-direction: row;
 justify-content: center;
 align-items: center;
 gap: 8px;
+cursor: pointer;
+`
+
+export const StyledIcon = styled.img`
+cursor: pointer;
 `

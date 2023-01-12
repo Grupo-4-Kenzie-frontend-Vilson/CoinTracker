@@ -8,6 +8,7 @@ font-weight: 500;
 font-size: 20px;
 line-height: 30px;
 color: #000000;
+cursor: pointer; 
 
 @media only screen and (max-width: 768px){
     width: 217px;

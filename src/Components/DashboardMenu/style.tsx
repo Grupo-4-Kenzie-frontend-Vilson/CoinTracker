@@ -5,6 +5,7 @@ display: flex;
 flex-direction: row;
 justify-content: space-between;
 background: #061121;
+margin-bottom: 24px;
 
 @media only screen and (max-width: 768px){
     padding: 2px 16px;
@@ -30,4 +31,8 @@ font-weight: 600;
 font-size: 36px;
 line-height: 54px;
 color: #FFFFFF;
+`
+
+export const StyledClickable = styled.div`
+cursor: pointer;
 `

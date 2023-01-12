@@ -1,5 +1,11 @@
-import React, { createContext, useState, useContext, useEffect } from "react";
+import { all } from "axios";
+import React, { createContext, useState, useEffect, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import { fakeApi } from "../../Services/fake-api";
+import { ExchangeContext } from "../exchange-context";
+import { toast } from "react-toastify";
+
+import "react-toastify/dist/ReactToastify.css";
 
 interface iWalletContextProps {
   children: React.ReactNode;
@@ -11,10 +17,15 @@ interface iWalletContextValue {
   editAsset: (data: iEditAsset, assetId: number) => Promise<void>;
   deleteAsset: (assetId: number) => Promise<void>;
   userAssets: [] | iUserAsset[];
+  logout: () => void;
+  generatePieChartData: () => void;
+  chartData: [] | iChartElement[];
+  userId: number;
 }
 
 interface iAddAssets {
   coin: string;
+  coinId: string;
   amount: number;
   userId: number;
 }
@@ -28,14 +39,23 @@ interface iUserAsset {
   amount: number;
   id: number;
   userId: number;
+  coinId: string;
+}
+interface iChartElement {
+  x: string;
+  y: number;
 }
 
 export const WalletContext = createContext({} as iWalletContextValue);
 
 export const WalletProvider = ({ children }: iWalletContextProps) => {
+  const navigate = useNavigate();
   const [userAssets, setUserAssets] = useState<[] | iUserAsset[]>([]);
+  const [chartData, setChartData] = useState<[] | iChartElement[]>([]);
 
   const userToken = window.localStorage.getItem("@userToken");
+
+  const { dollarPrice, allCoins } = useContext(ExchangeContext);
 
   const userIdLocalStorage = window.localStorage.getItem("@userId");
   const userId = Number(userIdLocalStorage);
@@ -47,14 +67,11 @@ export const WalletProvider = ({ children }: iWalletContextProps) => {
           Authorization: `Bearer ${userToken}`,
         },
       });
-      console.log(fetch);
       setUserAssets(fetch.data.assets);
     } catch (err) {
       console.log(err);
     }
   }
-
-  console.log(userAssets);
 
   async function addAsset(data: iAddAssets) {
     try {
@@ -65,7 +82,10 @@ export const WalletProvider = ({ children }: iWalletContextProps) => {
           headers: { Authorization: `Bearer ${userToken}` },
         }
       );
-      console.log(fetch);
+      toast.success("Adicionado com sucesso!", {
+        position: "top-right",
+        autoClose: 2000,
+      });
     } catch (err) {
       console.log(err);
     }
@@ -80,7 +100,10 @@ export const WalletProvider = ({ children }: iWalletContextProps) => {
           headers: { Authorization: `Bearer ${userToken}` },
         }
       );
-      console.log(fetch);
+      toast.success("Editado com sucesso!", {
+        position: "top-right",
+        autoClose: 2000,
+      });
     } catch (err) {
       console.log(err);
     }
@@ -91,19 +114,51 @@ export const WalletProvider = ({ children }: iWalletContextProps) => {
       const fetch = await fakeApi.delete(`/assets/${assetId}`, {
         headers: { Authorization: `Bearer ${userToken}` },
       });
-      console.log(fetch);
+      toast.success("Deletado com sucesso!", {
+        position: "top-right",
+        autoClose: 2000,
+      });
     } catch (err) {
       console.log(err);
     }
   }
 
-  useEffect(() => {
-    fetchUserAssets(userId);
-  }, []);
+  function logout() {
+    window.localStorage.removeItem("@userToken");
+    window.localStorage.removeItem("@userId");
+    navigate("/login");
+  }
+
+  function generatePieChartData() {
+    const newAssets = userAssets.map((asset) => {
+      const coinPrice = allCoins.find(
+        (coin) => coin.uuid === asset.coinId
+      )!.price;
+      const coinName = asset.coin;
+      const amountValue = asset.amount * dollarPrice * +coinPrice;
+      const newChartElement = {
+        x: coinName,
+        y: amountValue,
+      };
+
+      return newChartElement;
+    });
+    setChartData([...newAssets]);
+  }
 
   return (
     <WalletContext.Provider
-      value={{ fetchUserAssets, addAsset, editAsset, deleteAsset, userAssets }}
+      value={{
+        fetchUserAssets,
+        generatePieChartData,
+        chartData,
+        addAsset,
+        editAsset,
+        deleteAsset,
+        userAssets,
+        logout,
+        userId,
+      }}
     >
       {children}
     </WalletContext.Provider>
