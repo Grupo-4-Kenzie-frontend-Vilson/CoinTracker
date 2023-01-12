@@ -1,4 +1,9 @@
-import React, { createContext, useState, SetStateAction, useEffect } from "react";
+import React, {
+  createContext,
+  useState,
+  SetStateAction,
+  useEffect,
+} from "react";
 import { awesomeApi } from "../../Services/awesome-api";
 import { coinRankingApi } from "../../Services/coinranking-api";
 
@@ -27,11 +32,10 @@ interface iCoin {
 export const ExchangeContext = createContext({} as iExchangeContext);
 
 export const ExchangeProvider = ({ children }: iExchangeContextProps) => {
-
-  const [allCoins, setAllCoins]   = useState<[] | iCoin[]>([])
-  const [favoriteCoins, setFavoriteCoins]   = useState<[] | iCoin[]>([])
-  const [dollarPrice, setDollarPrice]   = useState<number>(5.2)
-  const [showOnlyFavCoins, setShowOnlyFavCoins] = useState<boolean>(false)
+  const [allCoins, setAllCoins] = useState<[] | iCoin[]>([]);
+  const [favoriteCoins, setFavoriteCoins] = useState<[] | iCoin[]>([]);
+  const [dollarPrice, setDollarPrice] = useState<number>(5.2);
+  const [showOnlyFavCoins, setShowOnlyFavCoins] = useState<boolean>(false);
 
   async function fetchAllCoins() {
     try {
@@ -42,6 +46,7 @@ export const ExchangeProvider = ({ children }: iExchangeContextProps) => {
         },
       });
       setAllCoins(fetch.data.data.coins);
+      console.log(allCoins);
     } catch (err) {
       console.log(err);
     }
@@ -58,8 +63,8 @@ export const ExchangeProvider = ({ children }: iExchangeContextProps) => {
 
   useEffect(() => {
     fetchAllCoins();
-  },[])
-  
+  }, []);
+
   fetchDollarPricing();
 
   return (

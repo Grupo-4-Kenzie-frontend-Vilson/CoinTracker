@@ -91,7 +91,11 @@ export const WalletCard = ({ cripto }: ICoinProps) => {
         className="modal-content"
       >
         <form onSubmit={handleSubmit(formSubmit)}>
-          <input type="number" {...register("amount")} value={amount} />
+          <input
+            type="number"
+            {...register("amount")}
+            placeholder={String(amount)}
+          />
           <button type="submit">Editar</button>
         </form>
       </Modal>
