@@ -31,7 +31,6 @@ export const DashboardPage = () => {
     <StyledMain>
       <MainDiv />
       <CoinsList />
-      <AddAsset />
     </StyledMain>
   );
 };
