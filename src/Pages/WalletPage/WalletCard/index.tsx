@@ -40,7 +40,6 @@ export const WalletCard = ({ cripto }: ICoinProps) => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
   } = useForm({ resolver: yupResolver(formSchema) });
 
   async function formSubmit(data: any) {

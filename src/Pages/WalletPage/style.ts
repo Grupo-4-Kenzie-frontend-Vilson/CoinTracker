@@ -2,13 +2,14 @@ import styled from "styled-components";
 
 export const StyledMain = styled.main`
   width: 100%;
+  margin-top: 1rem;
   margin-bottom: 2rem;
 
   display: flex;
   justify-content: center;
 
   .container {
-    width: 1080px;
+    width: 1400px;
     max-width: 100%;
 
     display: flex;
@@ -31,7 +32,8 @@ export const StyledMain = styled.main`
   }
 
   .container > section {
-    width: 90%;
+    width: 1400px;
+    max-width: 100%;
 
     display: flex;
     flex-direction: column;
@@ -42,15 +44,14 @@ export const StyledMain = styled.main`
   }
 
   .pieChart {
-    width: 100%;
+    width: 60%;
+    max-width: 500px;
 
     display: flex;
     align-items: center;
-  }
 
-  .pieChart > img {
-    width: 100%;
-    background-color: red;
+    border-radius: 1rem;
+    overflow: hidden;
   }
 
   .container > section > ul {
@@ -63,7 +64,7 @@ export const StyledMain = styled.main`
     align-items: center;
 
     gap: 1rem;
-    margin-top: 3rem;
+    margin-top: 2rem;
 
     overflow-y: scroll;
     scrollbar-width: none;
@@ -81,10 +82,17 @@ export const StyledMain = styled.main`
     .container > section {
       flex-direction: row;
       justify-content: space-between;
+      align-items: unset;
     }
 
     .container > section > ul {
       width: 50%;
+      margin-top: unset;
+      max-height: 500px;
+    }
+
+    .container > section > ul > li {
+      width: 100%;
     }
   }
 `;

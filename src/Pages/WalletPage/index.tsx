@@ -3,7 +3,6 @@ import { Button } from "../../Components/Button";
 import { WalletContext } from "../../Contexts/wallet-context";
 import { StyledMain } from "./style";
 import { WalletCard } from "./WalletCard";
-import heartImg from "../../assets/heart.svg";
 import { AddAsset } from "../../Components/AddAsset";
 import { VictoryPie } from "victory";
 
