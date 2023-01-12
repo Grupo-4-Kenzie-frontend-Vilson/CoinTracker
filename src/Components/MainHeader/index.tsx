@@ -11,16 +11,15 @@ export const MainHeader = () => {
     return (
         <>
             <StyledMainHeader>
-                <DivCenterContent>
+                <DivCenterContent
+                        onClick={() => {
+                            location.href="/dashboard"
+                        }}>
                     {
                         isBigScreen === true && 
                         <AnimationLogo height={120} width={80} />
                     }
-                    <h1
-                        onClick={() => {
-                            location.href="/dashboard"
-                        }}
-                    >CoinTracker</h1>
+                    <h1>CoinTracker</h1>
                 </DivCenterContent>
                 <DivCenterContent>
                     <StyledIcon src={walletIcon} alt="walletIcon"

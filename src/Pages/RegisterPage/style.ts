@@ -19,6 +19,7 @@ export const StyledSectionAnimation = styled.section`
   height: 100%;
   display: flex;
   position: relative;
+  align-items: center;
 
   .wave {
     position: absolute;
