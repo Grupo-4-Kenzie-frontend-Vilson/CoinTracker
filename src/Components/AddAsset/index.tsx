@@ -8,13 +8,6 @@ import { WalletContext } from "../../Contexts/wallet-context";
 import { StyledAddAsset } from "./style";
 import wallet from "../../assets/mywallet.png";
 
-interface iFormSubmit {
-  coin: string;
-  coinId: string;
-  amount: number;
-  userId: number;
-}
-
 Modal.setAppElement("#root");
 
 export const AddAsset = () => {
@@ -95,7 +88,7 @@ export const AddAsset = () => {
               </option>
             ))}
           </select>
-          <input type="number" {...register("amount")} />
+          <input type="number" {...register("amount")} step="any" />
           <div className="buttonModal">
             <button type="submit">Adicionar</button>
           </div>
